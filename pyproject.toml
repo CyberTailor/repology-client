@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: 2022-2024 Anna <cyber@sysrq.in>
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "repology-client"
+description = "Asynchronous wrapper for Repology API"
+authors = [
+    {name = "Anna", email = "cyber@sysrq.in"}
+]
+dynamic = ["version"]
+readme = "README.md"
+license = "EUPL-1.2"
+requires-python = ">=3.10"
+dependencies = [
+    "aiohttp<4,>=3",
+    "pydantic<3,>=2",
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Software Distribution",
+    "Typing :: Typed",
+]
+keywords = ["repology", "api", "async", "aiohttp"]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-recording",
+]
+docs = [
+    "aiohttp-theme",
+    "sphinx",
+    "sphinx-prompt",
+]
+
+[project.urls]
+Home = "https://repology-client.sysrq.in/"
+Source = "https://git.sysrq.in/python/repology-client"
+Issues = "https://bugs.sysrq.in/enter_bug.cgi?product=Python libraries&component=repology-client"
+Changelog = "https://repology-client.sysrq.in/release-notes.html"
+
+[tool.hatch.version]
+path = "repology_client/constants.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/docs",
+    "/repology_client",
+    "/tests"
+]
+exclude = [
+    "/docs/api"
+]
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules --block-network -p no:vcr"
+asyncio_mode = "strict"
+
+[[tool.mypy.overrides]]
+module = [
+    "tests.*",
+]
+# requiring explicit types for all test methods would be cumbersome
+disallow_untyped_defs = false
+check_untyped_defs = true
+
+[tool.mypy]
+disallow_untyped_defs = true
+no_implicit_optional = true

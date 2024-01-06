@@ -1,0 +1,43 @@
+interactions:
+- request:
+    body: null
+    headers: {}
+    method: GET
+    uri: https://repology.org/api/v1/project/79c603a2a2c65e868f369a1a16769077
+  response:
+    body:
+      string: '[]'
+    headers:
+      Cache-Control:
+      - max-age=3600
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2'
+      Content-Security-Policy:
+      - default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self'; font-src
+        'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 06 Jan 2024 20:55:56 GMT
+      Expires:
+      - Sat, 06 Jan 2024 21:55:56 GMT
+      Permissions-Policy:
+      - interest-cohort=()
+      Referrer-Policy:
+      - unsafe-url
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding, Cookie
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+    status:
+      code: 200
+      message: OK
+version: 1
