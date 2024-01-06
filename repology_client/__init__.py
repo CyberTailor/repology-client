@@ -114,8 +114,8 @@ async def get_projects(start: str = "", end: str = "", count: int = 200, *,
                 # we probably hit API limits, so…
                 # …choose lexicographically highest project as a new start
                 proj_range.start = max(batch)
-                # …make sure we haven't already hit the end
-                if proj_range.start >= end:
+                # …make sure we haven't already hit the requested end
+                if end and proj_range.start >= end:
                     break
                 # …and drop end condition as unsupported
                 proj_range.end = ""

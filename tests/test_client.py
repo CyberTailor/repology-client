@@ -57,6 +57,13 @@ async def test_get_projects_simple(session: aiohttp.ClientSession) -> None:
 
 @pytest.mark.vcr
 @pytest.mark.asyncio(scope="session")
+async def test_get_400_projects(session: aiohttp.ClientSession) -> None:
+    projects = await repology_client.get_projects(count=400, session=session)
+    assert len(projects) > 200
+
+
+@pytest.mark.vcr
+@pytest.mark.asyncio(scope="session")
 async def test_get_projects_start_and_end(session: aiohttp.ClientSession) -> None:
     with pytest.warns(UserWarning):
         await repology_client.get_projects("a", "b", session=session)

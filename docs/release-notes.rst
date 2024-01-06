@@ -4,6 +4,11 @@
 Release Notes
 =============
 
+0.0.2
+-----
+
+* Fix fetching >200 projects.
+
 0.0.1
 -----
 

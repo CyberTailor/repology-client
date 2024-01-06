@@ -55,8 +55,9 @@ path = "repology_client/constants.py"
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "/docs",
     "/repology_client",
+
+    "/docs",
     "/tests"
 ]
 exclude = [
