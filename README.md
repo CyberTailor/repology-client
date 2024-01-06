@@ -4,7 +4,7 @@
 repology-client
 ===============
 
-[![Build Status](https://drone.tildegit.org/api/badges/CyberTaIlor/python-repology/status.svg)](https://drone.tildegit.org/CyberTaIlor/python-repology)
+[![Build Status](https://drone.tildegit.org/api/badges/CyberTaIlor/repology-client/status.svg)](https://drone.tildegit.org/CyberTaIlor/repology-client)
 
 Asynchronous wrapper for [Repology API][repology-api].
 
