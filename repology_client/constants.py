@@ -10,7 +10,7 @@ wrong?
 PACKAGE = "repology-client"
 
 # Library version.
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 
 # Library homepage.
 HOMEPAGE = "https://repology-client.sysrq.in"
