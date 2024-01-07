@@ -4,6 +4,11 @@
 Release Notes
 =============
 
+0.0.3
+-----
+
+* Fix default session not closing properly.
+
 0.0.2
 -----
 

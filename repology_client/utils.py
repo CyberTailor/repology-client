@@ -73,7 +73,8 @@ async def ensure_session(
         session = aiohttp.ClientSession(headers=headers, timeout=timeout)
         keep_session = False
 
-    yield session
-
-    if not keep_session:
-        await session.close()
+    try:
+        yield session
+    finally:
+        if not keep_session:
+            await session.close()
