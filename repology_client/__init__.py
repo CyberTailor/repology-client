@@ -3,6 +3,7 @@
 
 """ Asynchronous wrapper for Repology API """
 
+import json
 import warnings
 from pathlib import PurePosixPath
 from typing import Any
@@ -16,6 +17,31 @@ from repology_client.utils import ensure_session, limit
 
 
 @limit(calls=1, period=1.0)
+async def _call(location: str, params: dict | None = None, *,
+                session: aiohttp.ClientSession | None = None) -> bytes:
+    """
+    Do a single rate-limited request.
+
+    :param location: URL location
+    :param params: URL query string parameters
+    :param session: :external+aiohttp:py:module:`aiohttp` client session
+
+    :raises repology.exceptions.EmptyResponse: on empty response
+    :raises aiohttp.ClientResponseError: on HTTP errors
+
+    :returns: raw response
+    """
+
+    async with ensure_session(session) as aiohttp_session:
+        async with aiohttp_session.get(location, params=params or {},
+                                       raise_for_status=True) as response:
+            data = await response.read()
+            if not data:
+                raise EmptyResponse
+
+    return data
+
+
 async def api(endpoint: str, params: dict | None = None, *,
               session: aiohttp.ClientSession | None = None) -> Any:
     """
@@ -27,17 +53,15 @@ async def api(endpoint: str, params: dict | None = None, *,
 
     :raises repology.exceptions.EmptyResponse: on empty response
     :raises aiohttp.ClientResponseError: on HTTP errors
+    :raises json.JSONDecodeError: on JSON decode failure
 
     :returns: decoded JSON response
     """
 
-    async with ensure_session(session) as aiohttp_session:
-        async with aiohttp_session.get(API_URL + endpoint,
-                                       params=params or {},
-                                       raise_for_status=True) as response:
-            data = await response.json()
-            if not data:
-                raise EmptyResponse
+    raw_data = await _call(API_URL + endpoint, params, session=session)
+    data = json.loads(raw_data)
+    if not data:
+        raise EmptyResponse
 
     return data
 
