@@ -4,6 +4,15 @@
 Release Notes
 =============
 
+0.1.0
+-----
+
+* **New:** :py:func:`repology_client.resolve_package` function providing
+  `Project by package name`__ tool's functionality.
+* **Gone:** Python 3.10 support.
+
+__ https://repology.org/tools/project-by
+
 0.0.3
 -----
 

@@ -3,7 +3,37 @@
 
 """ Type definitions for Repology API, implemented as Pydantic models. """
 
+from enum import StrEnum
+
 from pydantic.dataclasses import dataclass
+
+
+class ResolvePackageType(StrEnum):
+    """
+    Package type enum for the "Project by package name" tool.
+    """
+
+    SOURCE = "srcname"
+    BINARY = "binname"
+
+
+@dataclass
+class _ResolvePkg:
+    """
+    Internal object used in the :py:func:`repology_client.resolve_package`
+    function to pass data into exceptions.
+    """
+
+    repo: str
+    name: str
+    name_type: ResolvePackageType
+
+    def __str__(self) -> str:
+        message_tmpl = "*{}* package '{}' in repository '{}'"
+        return message_tmpl.format(
+            "binary" if self.name_type == ResolvePackageType.BINARY else "source",
+            self.name, self.repo
+        )
 
 
 @dataclass

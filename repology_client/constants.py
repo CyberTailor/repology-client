@@ -21,6 +21,9 @@ USER_AGENT = f"Mozilla/5.0 (compatible; {PACKAGE}/{VERSION}; +{HOMEPAGE})"
 # Base URL for all API requests.
 API_URL = "https://repology.org/api/v1"
 
+# Base URL for the "Project by package name" tool.
+TOOL_PROJECT_BY_URL = "https://repology.org/tools/project-by"
+
 # Maximum number of projects API can return.
 MAX_PROJECTS = 200
 
