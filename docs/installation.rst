@@ -22,7 +22,7 @@ The following dependencies are used by this library:
 Gentoo
 ------
 
-gentle is packaged for Gentoo in the GURU ebuild repository.
+This library is packaged for Gentoo in the GURU ebuild repository.
 
 .. prompt:: bash #
 

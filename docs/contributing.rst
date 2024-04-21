@@ -53,6 +53,7 @@ Finally, send a patch to the developer using `git send-email`_:
 Code style
 ----------
 
-Whatever the almighty linters say, should be at least `PEP 8`_.
+Whatever the almighty linters say. Code style should conform the `PEP 8`_
+standard at least.
 
 .. _PEP 8: https://peps.python.org/pep-0008/

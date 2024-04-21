@@ -10,7 +10,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'repology-client'
-author = 'Anna <cyber@sysrq.in>'
+author = 'Anna Vyalkova'
 copyright = f'2024, {author}'
 release = '0.0.2'
 
