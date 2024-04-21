@@ -10,13 +10,9 @@ Release Notes
 * **New:** :py:func:`repology_client.resolve_package` function providing
   `Project by package name`__ tool's functionality.
 * **Gone:** Python 3.10 support.
+* Fix default session not closing properly.
 
 __ https://repology.org/tools/project-by
-
-0.0.3
------
-
-* Fix default session not closing properly.
 
 0.0.2
 -----
