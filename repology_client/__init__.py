@@ -5,7 +5,7 @@
 
 from types import SimpleNamespace
 
-from repology_client._client import (
+from repology_client._client.v1 import (
     api,
     get_packages,
     get_projects,
