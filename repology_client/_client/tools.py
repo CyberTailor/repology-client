@@ -31,18 +31,20 @@ async def resolve_package(repo: str, name: str,
     name into ``/api/v1/project/<project>`` project information.
 
     If you disable autoresolve, ambigous package names will raise the
-    :py:class:`MultipleProjectsFound` exception. It will however contain all
-    matching project names, so you can continue.
+    :py:class:`repology_client.exceptions.resolve.MultipleProjectsFound`
+    exception. It will however contain all matching project names, so you can
+    continue.
 
     :param repo: repository name on Repology
     :param name: package name in the repository
     :param name_type: which name is used, "source" or "binary"
     :param autoresolve: enable automatic ambiguity resolution
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.resolve.MultipleProjectsFound: on
-    ambigous package names when automatic resolution is disabled
+        ambigous package names when automatic resolution is disabled
     :raises repology_client.exceptions.resolve.ProjectNotFound: on failed
-    resolve resulting in the "404 Not Found" HTTP error
+        resolve resulting in the "404 Not Found" HTTP error
     :raises aiohttp.ClientResponseError: on HTTP errors (except 404)
     :raises ValueError: on JSON decode failure
 

@@ -10,6 +10,8 @@ from pydantic.dataclasses import dataclass
 
 _DistromapPackages = tuple[str, ...]
 _DistromapGroups = tuple[_DistromapPackages, _DistromapPackages]
+
+#: Intermapping of packages between two repositories.
 Distromap = tuple[_DistromapGroups, ...]
 
 

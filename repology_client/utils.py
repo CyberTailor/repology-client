@@ -17,10 +17,11 @@ from repology_client.constants import USER_AGENT
 
 class limit():
     """
-    Based on `this StackOverflow answer
-    <https://stackoverflow.com/questions/35196974/aiohttp-set-maximum-number-of-requests-per-second/62503115>`_.
+    Decorator to set a limit on requests per second.
 
-    Set a limit on requests per second.
+    Based on `this StackOverflow answer`__.
+
+    __ https://stackoverflow.com/a/62503115/4257264
     """
 
     def __init__(self, calls: int, period: float):
@@ -63,7 +64,7 @@ async def ensure_session(
     """
     Create a new client session, if necessary, and close it on exit.
 
-    :param session: :external+aiohttp:py:module:`aiohttp` client session
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
     """
 
     keep_session = True

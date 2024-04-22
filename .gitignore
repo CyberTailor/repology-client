@@ -7,7 +7,6 @@ __pycache__
 *.pyo
 
 docs/_build
-docs/api
 dist
 venv
 

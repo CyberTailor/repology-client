@@ -18,7 +18,9 @@ from repology_client._client.experimental import (
     distromap,
 )
 
+#: Asynchronous wrapper for experimental endpoints of Repology API.
 exp = SimpleNamespace()
+
 exp.api = api_exp
 exp.distromap = distromap
 

@@ -6,6 +6,9 @@ API Reference
 
 .. autosummary::
     :toctree: api
-    :recursive:
 
     repology_client
+    repology_client.constants
+    repology_client.exceptions
+    repology_client.types
+    repology_client.utils

@@ -22,11 +22,11 @@ async def api(endpoint: str, params: dict | None = None, *,
 
     :param endpoint: API endpoint (example: ``/distromap``)
     :param params: URL query string parameters
-    :param session: :external+aiohttp:py:module:`aiohttp` client session
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises repology_client.exceptions.InvalidInput: on invalid endpoint
-    parameter
+        parameter
     :raises aiohttp.ClientResponseError: on HTTP errors
     :raises json.JSONDecodeError: on JSON decode failure
 
@@ -44,11 +44,11 @@ async def distromap(fromrepo: str, torepo: str, *,
 
     :param fromrepo: first repository
     :param torepo: second repository
-    :param session: :external+aiohttp:py:module:`aiohttp` client session
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises repology_client.exceptions.InvalidInput: if repositories are no
-    different or one of them is an empty string
+        different or one of them is an empty string
     :raises aiohttp.ClientResponseError: on HTTP errors
 
     :returns: decoded API response

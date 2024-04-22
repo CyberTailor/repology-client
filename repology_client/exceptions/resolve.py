@@ -20,7 +20,14 @@ class PackageResolveException(RepologyException):
         if message is None:
             message = f"Exception occured while resolving {pkg!s}"
         super().__init__(message)
-        self.pkg = pkg
+        self._pkg = pkg
+
+    @property
+    def pkg(self) -> _ResolvePkg:
+        """
+        Underlying :py:class:`repology_client.types._ResolvePkg` object.
+        """
+        return self._pkg
 
 
 class ProjectNotFound(PackageResolveException):
@@ -39,11 +46,18 @@ class MultipleProjectsFound(PackageResolveException):
     Raised if Repology was requested to get project by package name without
     automatic ambiguity resolution and responded with multiple results.
 
-    Instances of this exception contain all package names returned by Repology.
+    Instances of this exception contain all project names returned by Repology.
     """
 
     def __init__(self, pkg: _ResolvePkg, names: Iterable[str]):
         message = f"Multiple projects found for {pkg!s}"
         super().__init__(pkg, message)
 
-        self.names = tuple(names)
+        self._names = tuple(names)
+
+    @property
+    def names(self) -> tuple[str, ...]:
+        """
+        Project names returned by Repology.
+        """
+        return self._names

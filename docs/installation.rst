@@ -15,7 +15,7 @@ Prerequisites
 The following dependencies are used by this library:
 
 * :external+aiohttp:doc:`aiohttp <index>`
-* `pydantic`_
+* `pydantic`_ (with direct use of pydantic-core)
 
 .. _pydantic: https://pydantic.dev/
 

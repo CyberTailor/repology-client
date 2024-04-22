@@ -40,7 +40,7 @@ test = [
     "pytest-recording",
 ]
 docs = [
-    "aiohttp-theme",
+    "alabaster",
     "sphinx",
     "sphinx-prompt",
 ]

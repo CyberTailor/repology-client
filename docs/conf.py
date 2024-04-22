@@ -49,17 +49,17 @@ intersphinx_mapping = {
     'aiohttp': ('https://docs.aiohttp.org/en/stable', None),
 }
 
-autodoc_default_flags = [
-    'members',
-    'show-inheritance',
-    'inherited-members',
-    'undoc-members',
-]
+autosummary_generate = False
+autodoc_default_options = {
+    'show-inheritance': True,
+    'undoc-members': True,
+    'member-order': 'bysource',
+}
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'aiohttp_theme'
+html_theme = 'alabaster'
 html_permalinks_icon = '#'
 html_theme_options = {
     'description': 'Asynchronous Python wrapper for Repology API',

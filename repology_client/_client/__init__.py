@@ -22,7 +22,7 @@ async def _call(location: str, params: dict | None = None, *,
 
     :param location: URL location
     :param params: URL query string parameters
-    :param session: :external+aiohttp:py:module:`aiohttp` client session
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises aiohttp.ClientResponseError: on HTTP errors
@@ -49,7 +49,7 @@ async def _json_api(base_url: str, endpoint: str | None = None,
     :param base: base API URL
     :param endpoint: API endpoint
     :param params: URL query string parameters
-    :param session: :external+aiohttp:py:module:`aiohttp` client session
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises aiohttp.ClientResponseError: on HTTP errors

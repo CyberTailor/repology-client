@@ -8,7 +8,10 @@ Release Notes
 -----
 
 * **New**: :py:func:`repology_client.exp.distromap` function for
-  ``/api/experimental/distromap`` endpoint
+  ``/api/experimental/distromap`` endpoint.
+* Parse JSON with possibly faster Pydantic parser, since we already use this
+  library.
+* Improve API documentation and switch to Alabaster HTML theme.
 
 0.1.0
 -----

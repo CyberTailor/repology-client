@@ -30,11 +30,11 @@ async def api(endpoint: str, params: dict | None = None, *,
 
     :param endpoint: API endpoint (example: ``/projects``)
     :param params: URL query string parameters
-    :param session: :external+aiohttp:py:module:`aiohttp` client session
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises repology_client.exceptions.InvalidInput: on invalid endpoint
-    parameter
+        parameter
     :raises aiohttp.ClientResponseError: on HTTP errors
     :raises ValueError: on JSON decode failure
 
@@ -51,11 +51,11 @@ async def get_packages(project: str, *,
     single project.
 
     :param project: project name on Repology
-    :param session: :external+aiohttp:py:module:`aiohttp` client session
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises repology_client.exceptions.InvalidInput: if ``project`` is an empty
-    string
+        string
     :raises aiohttp.ClientResponseError: on HTTP errors
 
     :returns: set of packages
@@ -81,7 +81,7 @@ async def get_projects(start: str = "", end: str = "", count: int = 200, *,
     :param start: name of the first project to start with
     :param end: name of the last project to end with
     :param count: maximum number of projects to fetch
-    :param session: :external+aiohttp:py:module:`aiohttp` client session
+    :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises aiohttp.ClientResponseError: on HTTP errors
