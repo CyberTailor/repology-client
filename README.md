@@ -5,6 +5,7 @@ repology-client
 ===============
 
 [![Build Status](https://drone.tildegit.org/api/badges/CyberTaIlor/repology-client/status.svg)](https://drone.tildegit.org/CyberTaIlor/repology-client)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8828/badge)](https://www.bestpractices.dev/projects/8828)
 
 Asynchronous wrapper for [Repology API][repology-api].
 
