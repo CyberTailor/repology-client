@@ -3,11 +3,9 @@
 
 """ Asynchronous wrapper for Repology API tools. """
 
-import json
-
 import aiohttp
 
-from repology_client._client import _call
+from repology_client._client import _json_api
 from repology_client.constants import TOOL_PROJECT_BY_URL
 from repology_client.exceptions.resolve import (
     MultipleProjectsFound,
@@ -41,11 +39,12 @@ async def resolve_package(repo: str, name: str,
     :param name_type: which name is used, "source" or "binary"
     :param autoresolve: enable automatic ambiguity resolution
 
-    :raises repology.exceptions.resolve.MultipleProjectsFound: on ambigous
-    package names when automatic resolution is disabled
-    :raises repology.exceptions.resolve.ProjectNotFound: on failed resolve
-    resulting in the "404 Not Found" HTTP error
+    :raises repology_client.exceptions.resolve.MultipleProjectsFound: on
+    ambigous package names when automatic resolution is disabled
+    :raises repology_client.exceptions.resolve.ProjectNotFound: on failed
+    resolve resulting in the "404 Not Found" HTTP error
     :raises aiohttp.ClientResponseError: on HTTP errors (except 404)
+    :raises ValueError: on JSON decode failure
 
     :returns: set of packages
     """
@@ -62,14 +61,13 @@ async def resolve_package(repo: str, name: str,
     pkg = _ResolvePkg(repo, name, name_type)
     try:
         async with ensure_session(session) as aiohttp_session:
-            raw_data = await _call(TOOL_PROJECT_BY_URL, params,
+            data = await _json_api(TOOL_PROJECT_BY_URL, params=params,
                                    session=aiohttp_session)
     except aiohttp.ClientResponseError as err:
         if err.status == 404:
             raise ProjectNotFound(pkg) from err
         raise
 
-    data = json.loads(raw_data)
     if (
         isinstance(data, dict)
         and (targets := data.get("targets")) is not None
