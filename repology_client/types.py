@@ -8,6 +8,11 @@ from enum import StrEnum
 from pydantic.dataclasses import dataclass
 
 
+_DistromapPackages = tuple[str, ...]
+_DistromapGroups = tuple[_DistromapPackages, _DistromapPackages]
+Distromap = tuple[_DistromapGroups, ...]
+
+
 class ResolvePackageType(StrEnum):
     """
     Package type enum for the "Project by package name" tool.

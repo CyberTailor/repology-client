@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: EUPL-1.2
 # SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
 
-""" Asynchronous wrapper for Repology API """
+""" Asynchronous wrapper for Repology API and tools. """
 
 import json
 import warnings
@@ -11,7 +11,7 @@ from typing import Any
 import aiohttp
 
 from repology_client.constants import (
-    API_URL,
+    API_V1_URL,
     HARD_LIMIT,
     MAX_PROJECTS,
     TOOL_PROJECT_BY_URL,
@@ -62,7 +62,7 @@ async def _call(location: str, params: dict | None = None, *,
 async def api(endpoint: str, params: dict | None = None, *,
               session: aiohttp.ClientSession | None = None) -> Any:
     """
-    Do a single API request.
+    Do a single API v1 request.
 
     :param endpoint: API endpoint (example: ``/projects``)
     :param params: URL query string parameters
@@ -75,7 +75,7 @@ async def api(endpoint: str, params: dict | None = None, *,
     :returns: decoded JSON response
     """
 
-    raw_data = await _call(API_URL + endpoint, params, session=session)
+    raw_data = await _call(API_V1_URL + endpoint, params, session=session)
     data = json.loads(raw_data)
     if not data:
         raise EmptyResponse

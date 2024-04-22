@@ -4,6 +4,12 @@
 Release Notes
 =============
 
+0.2.0
+-----
+
+* **New**: :py:func:`repology_client.exp.distromap` function for
+  ``/api/experimental/distromap`` endpoint
+
 0.1.0
 -----
 

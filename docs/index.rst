@@ -38,6 +38,7 @@ The following endpoints are supported:
 
 * ``/api/v1/project/<project>``
 * ``/api/v1/projects/``
+* ``/api/experimental/distromap/``
 * ``/tools/project-by``
 
 Need more? Your :doc:`contributions <contributing>` are welcome!
