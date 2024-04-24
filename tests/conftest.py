@@ -12,8 +12,10 @@ import pytest_asyncio
 async def session() -> AsyncGenerator[aiohttp.ClientSession, None]:
     timeout = aiohttp.ClientTimeout(total=30)
     test_session = aiohttp.ClientSession(timeout=timeout)
-    yield test_session
-    await test_session.close()
+    try:
+        yield test_session
+    finally:
+        await test_session.close()
 
 
 @pytest.fixture(autouse=True)
