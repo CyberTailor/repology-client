@@ -4,7 +4,6 @@
 from collections.abc import AsyncGenerator
 
 import aiohttp
-import pytest
 import pytest_asyncio
 
 
@@ -16,8 +15,3 @@ async def session() -> AsyncGenerator[aiohttp.ClientSession, None]:
         yield test_session
     finally:
         await test_session.close()
-
-
-@pytest.fixture(autouse=True)
-def vcr_config():
-    return {"allowed_hosts": [r"repology\.org"]}
