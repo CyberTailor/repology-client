@@ -26,8 +26,8 @@ repology\_client.exp
 
    .. rubric:: High-level Functions
 
-   .. autofunction:: distromap
+   .. autofunction:: repology_client.exp.distromap
 
    .. rubric:: Low-level Functions
 
-   .. autofunction:: api
+   .. autofunction:: repology_client.exp.api
