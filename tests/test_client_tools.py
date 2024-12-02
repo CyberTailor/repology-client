@@ -18,7 +18,7 @@ import tests.common
 
 @pytest.mark.vcr
 @pytest.mark.skip(reason="vcrpy doesn't record a cassette")
-@pytest.mark.asyncio(scope="session")
+@pytest.mark.asyncio(loop_scope="session")
 async def test_resolve_package_notfound(session: aiohttp.ClientSession):
     with pytest.raises(ProjectNotFound):
         repo = uuid.uuid5(uuid.NAMESPACE_DNS, "invalid.domain").hex
@@ -30,7 +30,7 @@ async def test_resolve_package_notfound(session: aiohttp.ClientSession):
 
 
 @pytest.mark.vcr
-@pytest.mark.asyncio(scope="session")
+@pytest.mark.asyncio(loop_scope="session")
 async def test_resolve_package_multiple(session: aiohttp.ClientSession):
     with pytest.raises(MultipleProjectsFound) as exc:
         # example from https://github.com/renovatebot/renovate/issues/11435
@@ -42,7 +42,7 @@ async def test_resolve_package_multiple(session: aiohttp.ClientSession):
 
 
 @pytest.mark.vcr
-@pytest.mark.asyncio(scope="session")
+@pytest.mark.asyncio(loop_scope="session")
 async def test_resolve_package(session: aiohttp.ClientSession):
     packages = await repology_client.resolve_package("freebsd", "www/firefox")
     tests.common.check_firefox_project(packages)

@@ -14,14 +14,14 @@ from repology_client.exceptions import (
 
 
 @pytest.mark.vcr
-@pytest.mark.asyncio(scope="session")
+@pytest.mark.asyncio(loop_scope="session")
 async def test_raw_api(session: aiohttp.ClientSession):
     updates = await repology_client.exp.api("/updates", session=session)
     assert len(updates) != 0
 
 
 @pytest.mark.vcr
-@pytest.mark.asyncio(scope="session")
+@pytest.mark.asyncio(loop_scope="session")
 async def test_distromap_invalid(session: aiohttp.ClientSession):
     with pytest.raises(InvalidInput):
         await repology_client.exp.distromap("foo", "")
@@ -31,7 +31,7 @@ async def test_distromap_invalid(session: aiohttp.ClientSession):
 
 
 @pytest.mark.vcr
-@pytest.mark.asyncio(scope="session")
+@pytest.mark.asyncio(loop_scope="session")
 async def test_distromap_empty(session: aiohttp.ClientSession):
     fromrepo = uuid.uuid5(uuid.NAMESPACE_DNS, "fromrepo.invalid.domain").hex
     torepo = uuid.uuid5(uuid.NAMESPACE_DNS, "torepo.invalid.domain").hex
@@ -41,7 +41,7 @@ async def test_distromap_empty(session: aiohttp.ClientSession):
 
 
 @pytest.mark.vcr
-@pytest.mark.asyncio(scope="session")
+@pytest.mark.asyncio(loop_scope="session")
 async def test_distromap(session: aiohttp.ClientSession):
     data = await repology_client.exp.distromap("pypi", "freebsd")
     assert (('pydantic',), ('devel/py-pydantic',)) in data

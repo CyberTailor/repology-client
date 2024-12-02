@@ -7,7 +7,7 @@ import aiohttp
 import pytest_asyncio
 
 
-@pytest_asyncio.fixture(scope="session")
+@pytest_asyncio.fixture(loop_scope="session")
 async def session() -> AsyncGenerator[aiohttp.ClientSession, None]:
     timeout = aiohttp.ClientTimeout(total=30)
     test_session = aiohttp.ClientSession(timeout=timeout)
