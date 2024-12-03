@@ -3,7 +3,10 @@
 
 """ Asynchronous wrapper for Repology API tools. """
 
+from collections.abc import Set
+
 import aiohttp
+from pydantic import TypeAdapter
 
 from repology_client._client import _json_api
 from repology_client.constants import TOOL_PROJECT_BY_URL
@@ -18,11 +21,13 @@ from repology_client.types import (
 )
 from repology_client.utils import ensure_session
 
+project_by_adapter: TypeAdapter = TypeAdapter(Set[Package])
+
 
 async def resolve_package(repo: str, name: str,
                           name_type: ResolvePackageType = ResolvePackageType.SOURCE,
                           *, autoresolve: bool = True,
-                          session: aiohttp.ClientSession | None = None) -> set[Package]:
+                          session: aiohttp.ClientSession | None = None) -> Set[Package]:
     """
     If you don't know how a project is named on Repology and therefore cannot
     use the :py:func:`get_packages` function, use this instead.
@@ -60,7 +65,7 @@ async def resolve_package(repo: str, name: str,
     if not autoresolve:
         params["noautoresolve"] = "on"
 
-    pkg = _ResolvePkg(repo, name, name_type)
+    pkg = _ResolvePkg.model_validate(params)
     try:
         async with ensure_session(session) as aiohttp_session:
             data = await _json_api(TOOL_PROJECT_BY_URL, params=params,
@@ -76,4 +81,4 @@ async def resolve_package(repo: str, name: str,
     ):
         raise MultipleProjectsFound(pkg, targets.keys())
 
-    return {Package(**package) for package in data}
+    return project_by_adapter.validate_python(data)

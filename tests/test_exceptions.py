@@ -9,7 +9,8 @@ from repology_client.types import (
 
 
 def test_multiple_projects_exception():
-    pkg = _ResolvePkg("freedos", "foo", ResolvePackageType.BINARY)
+    pkg = _ResolvePkg(repo="freedos", name="foo",
+                      name_type=ResolvePackageType.BINARY)
     names = {
         "foo": "https://foo.example.com",
         "neofoo": "https://neofoo.example.org",

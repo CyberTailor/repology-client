@@ -5,7 +5,7 @@
 
 from enum import StrEnum
 
-from pydantic.dataclasses import dataclass
+from pydantic import BaseModel, ConfigDict
 
 
 _DistromapPackages = tuple[str, ...]
@@ -24,15 +24,20 @@ class ResolvePackageType(StrEnum):
     BINARY = "binname"
 
 
-@dataclass
-class _ResolvePkg:
+class _ResolvePkg(BaseModel):
     """
     Internal object used in the :py:func:`repology_client.resolve_package`
     function to pass data into exceptions.
     """
+    model_config = ConfigDict(defer_build=True, frozen=True)
 
+    #: Repository name.
     repo: str
+
+    #: Package name.
     name: str
+
+    #: Package type (source or binary).
     name_type: ResolvePackageType
 
     def __str__(self) -> str:
@@ -43,8 +48,7 @@ class _ResolvePkg:
         )
 
 
-@dataclass
-class ProjectsRange:
+class ProjectsRange(BaseModel):
     """
     Object for constructing a string representation of range.
 
@@ -57,8 +61,13 @@ class ProjectsRange:
     >>> str(ProjectsRange(start="firefox", end="firefoxpwa"))
     'firefox..firefoxpwa'
     """
+    model_config = ConfigDict(defer_build=True, extra="forbid",
+                              validate_assignment=True)
 
+    #: First project to be included in range.
     start: str = ""
+
+    #: Last project to be included in range.
     end: str = ""
 
     def __bool__(self) -> bool:
@@ -72,24 +81,38 @@ class ProjectsRange:
         return ""
 
 
-@dataclass(frozen=True)
-class Package:
+class Package(BaseModel):
     """
     Package description type returned by ``/api/v1/projects/`` endpoint.
     """
+    model_config = ConfigDict(defer_build=True, frozen=True)
 
     # Required fields
+
+    #: Name of repository for this package.
     repo: str
+    #: Package name as shown to the user by Repology.
     visiblename: str
+    #: Package version (sanitized, as shown by Repology).
     version: str
+    #: Package status ('newest', 'unique', 'outdated', etc).
     status: str
 
     # Optional fields
+
+    #: Name of subrepository (if applicable).
     subrepo: str | None = None
+    #: Package name as used in repository - source package name.
     srcname: str | None = None
+    #: Package name as used in repository - binary package name.
     binname: str | None = None
+    #: Package version as in repository.
     origversion: str | None = None
+    #: One-line description of the package.
     summary: str | None = None
+    #: List of package categories.
     categories: frozenset[str] | None = None
+    #: List of package licenses.
     licenses: frozenset[str] | None = None
+    #: List of package maintainers.
     maintainers: frozenset[str] | None = None

@@ -4,31 +4,47 @@
 Release Notes
 =============
 
+0.2.0-next
+----------
+
+- **Breaking**: Switch types from Pydantic dataclasses to Pydantic models.
+
+- Use ``collections.abc`` types in return annotations (such as ``Set`` and
+  ``Mapping``).
+
+- Initiate ``TypeAdapter`` once to improve perfomance.
+
+- Defer building Pydantic models until the first use.
+
 0.2.0
 -----
 
-* **New**: :py:func:`repology_client.exp.distromap` function for
+- **New**: :py:func:`repology_client.exp.distromap` function for
   ``/api/experimental/distromap`` endpoint.
-* Parse JSON with possibly faster Pydantic parser, since we already use this
+
+- Parse JSON with possibly faster Pydantic parser, since we already use this
   library.
-* Improve API documentation and switch to Alabaster HTML theme.
+
+- Improve API documentation and switch to Alabaster HTML theme.
 
 0.1.0
 -----
 
-* **New:** :py:func:`repology_client.resolve_package` function providing
+- **New:** :py:func:`repology_client.resolve_package` function providing
   `Project by package name`__ tool's functionality.
-* **Gone:** Python 3.10 support.
-* Fix default session not closing properly.
+
+- **Gone:** Python 3.10 support.
+
+- Fix default session not closing properly.
 
 __ https://repology.org/tools/project-by
 
 0.0.2
 -----
 
-* Fix fetching >200 projects.
+- Fix fetching >200 projects.
 
 0.0.1
 -----
 
-* First release
+- First release

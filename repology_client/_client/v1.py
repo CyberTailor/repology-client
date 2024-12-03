@@ -4,10 +4,12 @@
 """ Asynchronous wrapper for Repology API v1. """
 
 import warnings
+from collections.abc import Mapping, Set
 from pathlib import PurePosixPath
 from typing import Any
 
 import aiohttp
+from pydantic import TypeAdapter
 
 from repology_client._client import _json_api
 from repology_client.constants import (
@@ -21,6 +23,8 @@ from repology_client.types import (
     ProjectsRange,
 )
 from repology_client.utils import ensure_session
+
+package_set_adapter: TypeAdapter = TypeAdapter(Set[Package])
 
 
 async def api(endpoint: str, params: dict | None = None, *,
@@ -45,7 +49,7 @@ async def api(endpoint: str, params: dict | None = None, *,
 
 
 async def get_packages(project: str, *,
-                       session: aiohttp.ClientSession | None = None) -> set[Package]:
+                       session: aiohttp.ClientSession | None = None) -> Set[Package]:
     """
     Access the ``/api/v1/project/<project>`` endpoint to list packages for a
     single project.
@@ -67,12 +71,12 @@ async def get_packages(project: str, *,
     async with ensure_session(session) as aiohttp_session:
         endpoint = PurePosixPath("/project") / project
         data = await api(str(endpoint), session=aiohttp_session)
-    return {Package(**package) for package in data}
+    return package_set_adapter.validate_python(data)
 
 
 async def get_projects(start: str = "", end: str = "", count: int = 200, *,
                        session: aiohttp.ClientSession | None = None,
-                       **filters: Any) -> dict[str, set[Package]]:
+                       **filters: Any) -> Mapping[str, Set[Package]]:
     """
     Access the ``/api/v1/projects/`` endpoint to list projects.
 
@@ -93,7 +97,7 @@ async def get_projects(start: str = "", end: str = "", count: int = 200, *,
         warnings.warn(f"Resetting count to {HARD_LIMIT} to prevent API abuse")
         count = HARD_LIMIT
 
-    proj_range = ProjectsRange(start, end)
+    proj_range = ProjectsRange(start=start, end=end)
     if start and end:
         warnings.warn("The 'start..end' range format is not supported by Repology API")
         proj_range.end = ""
@@ -109,7 +113,7 @@ async def get_projects(start: str = "", end: str = "", count: int = 200, *,
             for project in batch:
                 result[project] = set()
                 for package in batch[project]:
-                    result[project].add(Package(**package))
+                    result[project].add(Package.model_validate(package))
 
             if len(result) >= count:
                 break

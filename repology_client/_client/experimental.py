@@ -14,6 +14,8 @@ from repology_client.exceptions import InvalidInput
 from repology_client.types import Distromap
 from repology_client.utils import ensure_session
 
+distromap_adapter = TypeAdapter(Distromap)
+
 
 async def api(endpoint: str, params: dict | None = None, *,
               session: aiohttp.ClientSession | None = None) -> Any:
@@ -68,5 +70,4 @@ async def distromap(fromrepo: str, torepo: str, *,
     async with ensure_session(session) as aiohttp_session:
         data = await api("/distromap", params=params, session=aiohttp_session)
 
-    DistromapAdapter = TypeAdapter(Distromap)
-    return DistromapAdapter.validate_python(data)
+    return distromap_adapter.validate_python(data)

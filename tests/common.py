@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: EUPL-1.2
 # SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
 
+from collections.abc import Set
+
 from repology_client.types import Package
 
 
-def check_firefox_project(packages: set[Package]):
+def check_firefox_project(packages: Set[Package]):
     """
     Check data returned by the ``/api/v1/project/firefox`` endpoint.
     """
