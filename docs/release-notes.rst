@@ -4,7 +4,7 @@
 Release Notes
 =============
 
-0.2.0-next
+0.3.0
 ----------
 
 - **Breaking**: Switch types from Pydantic dataclasses to Pydantic models.
