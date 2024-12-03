@@ -6,11 +6,14 @@ from collections.abc import AsyncGenerator
 import aiohttp
 import pytest_asyncio
 
+from repology_client.constants import USER_AGENT
+
 
 @pytest_asyncio.fixture(loop_scope="session")
 async def session() -> AsyncGenerator[aiohttp.ClientSession, None]:
     timeout = aiohttp.ClientTimeout(total=30)
-    test_session = aiohttp.ClientSession(timeout=timeout)
+    headers = {"user-agent": USER_AGENT}
+    test_session = aiohttp.ClientSession(headers=headers, timeout=timeout)
     try:
         yield test_session
     finally:

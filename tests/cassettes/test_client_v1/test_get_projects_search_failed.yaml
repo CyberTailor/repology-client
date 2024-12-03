@@ -1,7 +1,9 @@
 interactions:
 - request:
     body: null
-    headers: {}
+    headers:
+      user-agent:
+      - Mozilla/5.0 (compatible; repology-client/0.2.0; +https://repology-client.sysrq.in)
     method: GET
     uri: https://repology.org/api/v1/projects/?search=79c603a2a2c65e868f369a1a16769077
   response:
@@ -20,9 +22,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 06 Jan 2024 20:56:01 GMT
+      - Tue, 03 Dec 2024 00:52:38 GMT
       Expires:
-      - Sat, 06 Jan 2024 21:56:01 GMT
+      - Tue, 03 Dec 2024 01:52:38 GMT
       Permissions-Policy:
       - interest-cohort=()
       Referrer-Policy:
