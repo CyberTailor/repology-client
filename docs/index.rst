@@ -24,7 +24,7 @@ If you need help, or want to talk to the developers, use our chat rooms:
 * IRC: `#repology-client`_ at ``irc.oftc.net``
 * Matrix: `#repology-client:sysrq.in`_
 
-.. _#repology-client: https://kiwiirc.com/nextclient/#ircs://irc.oftc.net:+6697/repology-client
+.. _#repology-client: https://webchat.oftc.net/?randomnick=1&channels=repology-client&prompt=1
 .. _#repology-client\:sysrq.in: https://matrix.to/#/#repology-client:sysrq.in
 
 If you find any bugs, please report them on `Bugzilla`_.
