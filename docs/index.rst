@@ -36,8 +36,10 @@ Features
 
 The following endpoints are supported:
 
+* ``/api/v1/maintainer/<maint>/problems-for-repo/<repo>``
 * ``/api/v1/project/<project>``
 * ``/api/v1/projects/``
+* ``/api/v1/repository/<repo>/problems``
 * ``/api/experimental/distromap/``
 * ``/tools/project-by``
 

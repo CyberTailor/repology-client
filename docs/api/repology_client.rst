@@ -1,4 +1,4 @@
-﻿.. SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
+﻿.. SPDX-FileCopyrightText: 20242-2025 Anna <cyber@sysrq.in>
 .. SPDX-License-Identifier: CC0-1.0
 
 repology\_client
@@ -12,6 +12,7 @@ repology\_client
    .. rubric:: High-level Functions
 
    .. autofunction:: get_packages
+   .. autofunction:: get_problems
    .. autofunction:: get_projects
    .. autofunction:: resolve_package
 

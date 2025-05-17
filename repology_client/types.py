@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: EUPL-1.2
-# SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
 
 """ Type definitions for Repology API, implemented as Pydantic models. """
 
@@ -116,3 +116,31 @@ class Package(BaseModel):
     licenses: frozenset[str] | None = None
     #: List of package maintainers.
     maintainers: frozenset[str] | None = None
+
+
+class Problem(BaseModel):
+    """
+    Type for problem entries returned by ``/api/v1/repository/<repo>/problems``
+    and ``/api/v1/maintainer/<maint>/problems-for-repo/<repo>`` endpoints.
+    """
+    model_config = ConfigDict(defer_build=True, frozen=True)
+
+    # Required fields
+
+    #: Problem type.
+    type: str
+    #: Additional details on the problem.
+    data: dict
+    #: Repology project name.
+    project_name: str
+    #: Normalized version as used by Repology.
+    version: str
+    #: Repository package version.
+    rawversion: str
+
+    # Optional fields
+
+    #: Repository (source) package name.
+    srcname: str | None = None
+    #: Repository (binary) package name.
+    binname: str | None = None

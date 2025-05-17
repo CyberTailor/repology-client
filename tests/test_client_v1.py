@@ -10,6 +10,7 @@ import repology_client
 from repology_client.exceptions import (
     EmptyResponse,
     InvalidInput,
+    RepoNotFound,
 )
 
 import tests.common
@@ -79,3 +80,51 @@ async def test_get_projects_search_failed(session: aiohttp.ClientSession):
 async def test_get_projects_search(session: aiohttp.ClientSession):
     projects = await repology_client.get_projects(search="firefox", session=session)
     assert "firefox" in projects
+
+
+@pytest.mark.vcr
+@pytest.mark.asyncio
+async def test_get_problems_empty(session: aiohttp.ClientSession):
+    with pytest.raises(InvalidInput):
+        await repology_client.get_problems("", session=session)
+
+
+@pytest.mark.vcr
+@pytest.mark.skip(reason="vcrpy doesn't record a cassette")
+@pytest.mark.asyncio
+async def test_get_problems_notfound(session: aiohttp.ClientSession):
+    repo = uuid.uuid5(uuid.NAMESPACE_DNS, "repology.org").hex
+    with pytest.raises(RepoNotFound):
+        await repology_client.get_problems(repo, session=session)
+
+
+@pytest.mark.vcr
+@pytest.mark.asyncio
+async def test_get_problems_simple(session: aiohttp.ClientSession):
+    problems = await repology_client.get_problems("freebsd", session=session)
+    assert len(problems) == 200
+
+
+@pytest.mark.vcr
+@pytest.mark.asyncio
+async def test_get_400_problems(session: aiohttp.ClientSession):
+    problems = await repology_client.get_problems("freebsd", count=400, session=session)
+    assert len(problems) > 200
+
+
+@pytest.mark.vcr
+@pytest.mark.asyncio
+async def test_get_maintainer_problems(session: aiohttp.ClientSession):
+    problems = await repology_client.get_problems("freebsd",
+                                                  maintainer="ports@freebsd.org",
+                                                  session=session)
+    assert len(problems) == 200
+
+
+@pytest.mark.vcr
+@pytest.mark.asyncio
+async def test_get_400_maintainer_problems(session: aiohttp.ClientSession):
+    problems = await repology_client.get_problems("freebsd", count=400,
+                                                  maintainer="ports@freebsd.org",
+                                                  session=session)
+    assert len(problems) > 200

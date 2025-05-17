@@ -1,9 +1,8 @@
 # SPDX-License-Identifier: EUPL-1.2
-# SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
 
 """
-Hardcoded constants for rapidly-changing Repology API. What could possibly go
-wrong?
+Hardcoded constants for Repology API.
 """
 
 #: Library package name.
@@ -29,6 +28,9 @@ TOOL_PROJECT_BY_URL = "https://repology.org/tools/project-by"
 
 #: Maximum number of projects API can return.
 MAX_PROJECTS = 200
+
+#: Maximum number of problems API can return.
+MAX_PROBLEMS = 200
 
 #: Number of projects, starting from which you should use bulk export instead.
 HARD_LIMIT = 5_000

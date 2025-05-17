@@ -1,11 +1,18 @@
-.. SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
+.. SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
 .. SPDX-License-Identifier: CC0-1.0
 
 Release Notes
 =============
 
-0.3.0
+0.3.0-next
 ----------
+
+- **New**: :py:func:`repology_client.get_problems` function for
+  ``/api/v1/repository/<repo>/problems`` and
+  ``/api/v1/maintainer/<maint>/problems-for-repo/<repo>`` endpoints.
+
+0.3.0
+-----
 
 - **Breaking**: Switch types from Pydantic dataclasses to Pydantic models.
 
