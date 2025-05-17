@@ -90,7 +90,7 @@ class Package(BaseModel):
     visiblename: str
     #: Package version (sanitized, as shown by Repology).
     version: str
-    #: Package status ('newest', 'unique', 'outdated', etc).
+    #: Package status ('newest', 'unique', 'outdated', etc.).
     status: str
 
     # Optional fields

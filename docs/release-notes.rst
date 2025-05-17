@@ -22,7 +22,7 @@ Release Notes
 - Use ``collections.abc`` types in return annotations (such as ``Set`` and
   ``Mapping``).
 
-- Initiate ``TypeAdapter`` once to improve perfomance.
+- Initiate ``TypeAdapter`` once to improve performance.
 
 - Defer building Pydantic models until the first use.
 

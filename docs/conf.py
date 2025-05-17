@@ -44,6 +44,14 @@ try:
 except ModuleNotFoundError:
     pass
 
+try:
+    import sphinxcontrib.spelling
+    extensions.append('sphinxcontrib.spelling')
+
+    spelling_word_list_filename='spelling_wordlist.txt'
+except ModuleNotFoundError:
+    pass
+
 master_doc = 'index'
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
