@@ -4,7 +4,7 @@
 Release Notes
 =============
 
-0.3.0-next
+0.4.0
 ----------
 
 - **Breaking**: Remove experimental API endpoints, since there are no plans to
