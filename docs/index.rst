@@ -40,7 +40,6 @@ The following endpoints are supported:
 * ``/api/v1/project/<project>``
 * ``/api/v1/projects/``
 * ``/api/v1/repository/<repo>/problems``
-* ``/api/experimental/distromap/``
 * ``/tools/project-by``
 
 Need more? Your :doc:`contributions <contributing>` are welcome!

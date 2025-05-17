@@ -20,9 +20,6 @@ USER_AGENT = f"Mozilla/5.0 (compatible; {PACKAGE}/{VERSION}; +{HOMEPAGE})"
 #: Base URL for API v1 requests.
 API_V1_URL = "https://repology.org/api/v1"
 
-#: Base URL for Experimental API requests.
-API_EXP_URL = "https://repology.org/api/experimental"
-
 #: Base URL for the "Project by package name" tool.
 TOOL_PROJECT_BY_URL = "https://repology.org/tools/project-by"
 

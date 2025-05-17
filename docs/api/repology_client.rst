@@ -1,11 +1,8 @@
-﻿.. SPDX-FileCopyrightText: 20242-2025 Anna <cyber@sysrq.in>
+﻿.. SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
 .. SPDX-License-Identifier: CC0-1.0
 
 repology\_client
 ================
-
-repology\_client
-----------------
 
 .. automodule:: repology_client
 
@@ -19,16 +16,3 @@ repology\_client
    .. rubric:: Low-level Functions
 
    .. autofunction:: api
-
-repology\_client.exp
---------------------
-
-.. autodata:: exp
-
-   .. rubric:: High-level Functions
-
-   .. autofunction:: repology_client.exp.distromap
-
-   .. rubric:: Low-level Functions
-
-   .. autofunction:: repology_client.exp.api

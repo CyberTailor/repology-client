@@ -7,6 +7,9 @@ Release Notes
 0.3.0-next
 ----------
 
+- **Breaking**: Remove experimental API endpoints, since there are no plans to
+  re-implement them in the new Repology webapp.
+
 - **New**: :py:func:`repology_client.get_problems` function for
   ``/api/v1/repository/<repo>/problems`` and
   ``/api/v1/maintainer/<maint>/problems-for-repo/<repo>`` endpoints.

@@ -1,18 +1,13 @@
 # SPDX-License-Identifier: EUPL-1.2
 # SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
 
-""" Type definitions for Repology API, implemented as Pydantic models. """
+"""
+Type definitions for Repology API, implemented as Pydantic models.
+"""
 
 from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict
-
-
-_DistromapPackages = tuple[str, ...]
-_DistromapGroups = tuple[_DistromapPackages, _DistromapPackages]
-
-#: Intermapping of packages between two repositories.
-Distromap = tuple[_DistromapGroups, ...]
 
 
 class ResolvePackageType(StrEnum):
