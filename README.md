@@ -34,9 +34,9 @@ emerge dev-python/repology-client
 Packaging
 ---------
 
-You can track new releases using an [atom feed][atom] provided by GitHub.
+You can track new releases using an [RSS feed][rss] provided by PyPI.
 
-[atom]: https://github.com/cybertailor/repology-client/releases.atom
+[rss]: https://pypi.org/rss/project/repology-client/releases.xml
 
 
 Contributing
