@@ -4,8 +4,13 @@
 Release Notes
 =============
 
-0.4.0
+0.4.0-next
 ----------
+
+- Increase the delay between API calls.
+
+0.4.0
+-----
 
 - **Breaking**: Remove experimental API endpoints, since there are no plans to
   re-implement them in the new Repology webapp.

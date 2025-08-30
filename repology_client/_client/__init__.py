@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: EUPL-1.2
-# SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
 
-""" Common code for Repology API clients. """
+"""
+Common code for Repology API clients.
+"""
 
 from pathlib import PurePosixPath
 from typing import Any
@@ -14,7 +16,7 @@ from repology_client.exceptions import EmptyResponse
 from repology_client.utils import ensure_session, limit
 
 
-@limit(calls=1, period=1.0)
+@limit(calls=1, period=1.25)
 async def _call(location: str, params: dict | None = None, *,
                 session: aiohttp.ClientSession | None = None) -> bytes:
     """
