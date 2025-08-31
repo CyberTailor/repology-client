@@ -13,6 +13,11 @@ from pydantic import BaseModel, ConfigDict
 class ResolvePackageType(StrEnum):
     """
     Package type enum for the "Project by package name" tool.
+
+    .. seealso::
+
+       :py:func:`repology_client.tools.resolve_package` function
+          Implements ``/tools/project-by`` endpoint.
     """
 
     SOURCE = "srcname"
@@ -78,7 +83,14 @@ class ProjectsRange(BaseModel):
 
 class Package(BaseModel):
     """
-    Package description type returned by ``/api/v1/projects/`` endpoint.
+    Package description type.
+
+    .. seealso::
+
+       :py:func:`repology_client.get_packages` function
+          Implements ``/api/v1/project/<project>`` endpoint.
+       :py:func:`repology_client.get_projects` function
+          Implements ``/api/v1/projects/`` endpoint.
     """
     model_config = ConfigDict(defer_build=True, frozen=True)
 
@@ -115,12 +127,13 @@ class Package(BaseModel):
 
 class Problem(BaseModel):
     """
-    Type for problem entries returned by ``/api/v1/repository/<repo>/problems``
-    and ``/api/v1/maintainer/<maint>/problems-for-repo/<repo>`` endpoints.
+    Type for repository problem entries.
 
     .. seealso::
 
        :py:func:`repology_client.get_problems` function
+          Implements ``/api/v1/repository/<repo>/problems`` and
+          ``/api/v1/maintainer/<maint>/problems-for-repo/<repo>`` endpoints.
 
        :py:func:`repology_client.utils.format_link_status` function
     """

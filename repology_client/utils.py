@@ -93,6 +93,8 @@ def format_link_status(code: int) -> str:
     .. seealso::
 
        :py:func:`repology_client.get_problems` function
+          Implements ``/api/v1/repository/<repo>/problems`` and
+          ``/api/v1/maintainer/<maint>/problems-for-repo/<repo>`` endpoints.
 
        :py:class:`repology_client.types.Problem` class
 
