@@ -41,6 +41,7 @@ try:
     sitemap_excludes = [
         '404.html',
     ]
+    sitemap_show_lastmod = True
 except ModuleNotFoundError:
     pass
 
