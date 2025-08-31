@@ -1,8 +1,10 @@
 # SPDX-License-Identifier: EUPL-1.2 AND CC-BY-SA-3.0
-# SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
 # SPDX-FileCopyrightText: 2017 Mark Amery <markrobertamery@gmail.com>
 
-""" Utility functions and classes. """
+"""
+Utility functions and classes.
+"""
 
 import asyncio
 import time
@@ -11,8 +13,10 @@ from contextlib import asynccontextmanager
 from typing import Any
 
 import aiohttp
+from pydantic import validate_call
 
 from repology_client.constants import USER_AGENT
+from repology_client.types import LinkStatus, _LinkStatusCodes
 
 
 class limit():
@@ -79,3 +83,37 @@ async def ensure_session(
     finally:
         if not keep_session:
             await session.close()
+
+
+@validate_call
+def format_link_status(code: int) -> str:
+    """
+    Convert status codes to human-readable messages.
+
+    .. seealso::
+
+       :py:func:`repology_client.get_problems` function
+
+       :py:class:`repology_client.types.Problem` class
+
+    >>> format_link_status(404)
+    'HTTP 404'
+    >>> format_link_status(-100)
+    'connect timeout (60 seconds)'
+    >>> format_link_status(-999)
+    'unknown status code -999, please report a bug to repology-client'
+    """
+
+    result: LinkStatus
+
+    # HTTP status codes
+    if code > 0:
+        result = LinkStatus(code)
+    else:
+        try:
+            result = _LinkStatusCodes(code).value
+        except ValueError:
+            result = LinkStatus(code, f"unknown status code {code}, please "
+                                      "report a bug to repology-client")
+
+    return str(result)

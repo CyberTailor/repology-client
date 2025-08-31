@@ -146,6 +146,13 @@ async def get_problems(repo: str, maintainer: str = "",
     """
     Access the endpoints to get problems for specific repository or maintainer.
 
+    .. seealso::
+
+       :py:func:`repology_client.utils.format_link_status` function
+          This helper function can be used to convert status codes (returned in
+          data objects of ``homepage_dead`` and ``download_dead`` problem types)
+          to human-readable messages.
+
     :param repo: repository name on Repology
     :param maintainer: maintainer e-mail address
     :param start: name of the first project to start with

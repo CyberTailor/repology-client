@@ -7,6 +7,10 @@ Release Notes
 0.4.0-next
 ----------
 
+- **New**: :py:func:`repology_client.utils.format_link_status` function for
+  converting status codes (returned in data objects of ``homepage_dead`` and
+  ``download_dead`` problem types) to human-readable messages.
+
 - Increase the delay between API calls.
 
 - Fix duplicate results in problems list.
