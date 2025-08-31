@@ -111,6 +111,10 @@ async def test_get_400_problems(session: aiohttp.ClientSession):
     problems = await repology_client.get_problems("freebsd", count=400, session=session)
     assert len(problems) > 200
 
+    # Make sure there are no duplicates
+    for item in problems:
+        assert problems.count(item) == 1
+
 
 @pytest.mark.vcr
 @pytest.mark.asyncio
@@ -128,3 +132,7 @@ async def test_get_400_maintainer_problems(session: aiohttp.ClientSession):
                                                   maintainer="ports@freebsd.org",
                                                   session=session)
     assert len(problems) > 200
+
+    # Make sure there are no duplicates
+    for item in problems:
+        assert problems.count(item) == 1

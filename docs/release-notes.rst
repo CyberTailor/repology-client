@@ -9,6 +9,8 @@ Release Notes
 
 - Increase the delay between API calls.
 
+- Fix duplicate results in problems list.
+
 0.4.0
 -----
 

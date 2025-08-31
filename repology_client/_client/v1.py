@@ -186,7 +186,13 @@ async def get_problems(repo: str, maintainer: str = "",
                 if err.status == 404:
                     raise RepoNotFound(repo) from err
                 raise
-            result.extend(problem_list_adapter.validate_python(batch))
+
+            # XXX: Remove duplicates to work around buggy paging.
+            problem_list = problem_list_adapter.validate_python(batch)
+            previous_page = result[-MAX_PROBLEMS:]
+            for problem in problem_list:
+                if problem not in previous_page:
+                    result.append(problem)
 
             if len(result) >= count:
                 break
