@@ -4,7 +4,7 @@
 Release Notes
 =============
 
-0.4.0-next
+0.5.0
 ----------
 
 - **New**: :py:func:`repology_client.utils.format_link_status` function for
