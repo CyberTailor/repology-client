@@ -36,16 +36,26 @@ classifiers = [
 ]
 keywords = ["repology", "api", "async", "aiohttp"]
 
-[project.optional-dependencies]
+[dependency-groups]
 test = [
     "pytest",
     "pytest-asyncio",
     "pytest-recording",
 ]
+typecheck = [
+    "mypy",
+    "types-setuptools",
+]
 docs = [
     "alabaster",
     "sphinx",
     "sphinx-prompt",
+]
+lint = [
+    "bandit",
+    "pycodestyle",
+    "pyflakes",
+    "reuse",
 ]
 
 [project.urls]
@@ -103,19 +113,16 @@ search = "{current_version}-next"
 replace = "{new_version}"
 
 [tool.tox]
-requires = ["tox>=4.21"]
-min_version = "4.21"
+requires = ["tox>=4.22"]
+min_version = "4.22"
 env_list = ["3.11", "3.12", "3.13", "lint"]
 
 [tool.tox.env_run_base]
 description = "run the tests + mypy under {base_python}"
 ignore_errors = true
-deps = [
-    "mypy",
-    "types-setuptools",
-]
-extras = [
+dependency_groups = [
     "test",
+    "typecheck",
 ]
 commands = [
     ["pytest", "-vv", "{tty:--color=yes}", "{posargs}"],
@@ -126,12 +133,7 @@ commands = [
 description = "run the linters"
 ignore_errors = true
 skip_install = true
-deps = [
-    "bandit",
-    "pycodestyle",
-    "pyflakes",
-    "reuse",
-]
+dependency_groups = ["lint"]
 commands = [
     ["reuse", "lint"],
     ["pyflakes", "repology_client", "tests"],
