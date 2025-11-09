@@ -28,6 +28,14 @@ What version policy does the library follow?
 
 `SemVer 2.0.0 <https://semver.org/spec/v2.0.0.html>`_.
 
+What Python versions does the library support?
+----------------------------------------------
+
+Up to three most recent of stable-keyworded CPython versions in Gentoo are
+supported.
+
+Other versions and implementations might also work but they are not tested.
+
 What is that EUPL license about? I've never seen it before.
 -----------------------------------------------------------
 
