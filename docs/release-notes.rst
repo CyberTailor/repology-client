@@ -1,11 +1,25 @@
-.. SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
+.. SPDX-FileCopyrightText: 2024-2026 Anna <cyber@sysrq.in>
 .. SPDX-License-Identifier: CC0-1.0
 
 Release Notes
 =============
 
-0.5.0
+0.5.0-next
 ----------
+
+- **Breaking**: :py:func:`repology_client.api` now takes :py:class:`yarl.URL`,
+  as our cursed custom URL processing was replaced by proper :pypi:`yarl` API.
+
+- **Gone**: Python 3.11 support.
+
+- Stricter typing.
+
+*Dependencies introduced:*
+
+- :pypi:`yarl` (it was already pulled by :pypi:`aiohttp`)
+
+0.5.0
+-----
 
 - **New**: :py:func:`repology_client.utils.format_link_status` function for
   converting status codes (returned in data objects of ``homepage_dead`` and

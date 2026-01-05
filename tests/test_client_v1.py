@@ -5,8 +5,10 @@ import uuid
 
 import aiohttp
 import pytest
+from yarl import URL
 
 import repology_client
+from repology_client.constants import API_V1_URL
 from repology_client.exceptions import (
     EmptyResponse,
     InvalidInput,
@@ -19,8 +21,9 @@ import tests.common
 @pytest.mark.vcr
 @pytest.mark.asyncio
 async def test_raw_api(session: aiohttp.ClientSession):
-    problems = await repology_client.api("/repository/freebsd/problems",
-                                         session=session)
+    url = URL(API_V1_URL) / "repository/freebsd/problems"
+    problems = await repology_client.api(url, session=session)
+    assert isinstance(problems, list)
     assert len(problems) != 0
 
 

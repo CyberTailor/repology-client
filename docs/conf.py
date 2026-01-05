@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: EUPL-1.2
-# SPDX-FileCopyrightText: 2023-2024 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2023-2026 Anna <cyber@sysrq.in>
 
 # Configuration file for the Sphinx documentation builder.
 #
@@ -20,6 +20,7 @@ release = '0.5.0'
 extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.autodoc',
+    'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
     'sphinx_prompt',
 ]
@@ -57,8 +58,16 @@ master_doc = 'index'
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+extlinks = {
+    'bug': ('https://bugs.sysrq.in/show_bug.cgi?id=%s', 'bug #%s'),
+    'gitweb': (f'https://git.sysrq.in/python/{project}/tree/%s', '%s'),
+    'pypi': ('https://pypi.org/project/%s/', '%s'),
+}
 intersphinx_mapping = {
+    'python': ('https://docs.python.org/3/', None),
     'aiohttp': ('https://docs.aiohttp.org/en/stable', None),
+    'pydantic': ('https://docs.pydantic.dev/latest/', None),
+    'yarl': ('https://yarl.aio-libs.org/en/stable', None),
 }
 
 autosummary_generate = False

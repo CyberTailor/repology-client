@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2022-2024 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2022-2026 Anna <cyber@sysrq.in>
 
 [build-system]
 requires = ["hatchling>=1.5"]
@@ -15,11 +15,12 @@ dynamic = ["version"]
 readme = "README.md"
 license = "EUPL-1.2 AND CC-BY-SA-3.0"
 license-files = { globs = ["LICENSES/*"] }
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
     "aiohttp<4,>=3",
     "pydantic<3,>=2",
     "pydantic-core<3,>=2",
+    "yarl",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -92,6 +93,8 @@ check_untyped_defs = true
 [tool.mypy]
 disallow_untyped_defs = true
 no_implicit_optional = true
+disallow_any_generics = true
+plugins = ["pydantic.mypy"]
 
 [tool.bumpversion]
 current_version = "0.5.0"

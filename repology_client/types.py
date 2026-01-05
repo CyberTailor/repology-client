@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: EUPL-1.2
-# SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2024-2026 Anna <cyber@sysrq.in>
 
 """
 Type definitions for Repology API.
@@ -7,7 +7,7 @@ Type definitions for Repology API.
 
 from enum import ReprEnum, StrEnum
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, JsonValue
 
 
 class ResolvePackageType(StrEnum):
@@ -144,7 +144,7 @@ class Problem(BaseModel):
     #: Problem type.
     type: str
     #: Additional details on the problem.
-    data: dict
+    data: dict[str, JsonValue]
     #: Repology project name.
     project_name: str
     #: Normalized version as used by Repology.

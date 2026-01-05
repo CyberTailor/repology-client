@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: EUPL-1.2 AND CC-BY-SA-3.0
-# SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2024-2026 Anna <cyber@sysrq.in>
 # SPDX-FileCopyrightText: 2017 Mark Amery <markrobertamery@gmail.com>
 
 """
@@ -7,16 +7,27 @@ Utility functions and classes.
 """
 
 import asyncio
+import functools
 import time
-from collections.abc import AsyncGenerator, Callable
+from collections.abc import AsyncGenerator, Awaitable, Callable
 from contextlib import asynccontextmanager
-from typing import Any
 
 import aiohttp
-from pydantic import validate_call
+from pydantic import TypeAdapter, validate_call
 
 from repology_client.constants import USER_AGENT
 from repology_client.types import LinkStatus, _LinkStatusCodes
+
+
+@functools.cache
+def get_type_adapter[T](t: type[T]) -> TypeAdapter[T]:
+    """
+    Get a cached :class:`TypeAdapter` instance.
+
+    :param t: type
+    """
+
+    return TypeAdapter(t)
 
 
 class limit():
@@ -39,8 +50,10 @@ class limit():
         self.last_reset: float = 0.0
         self.num_calls: int = 0
 
-    def __call__(self, func: Callable) -> Callable:
-        async def wrapper(*args: Any, **kwargs: Any) -> Callable:
+    def __call__[**P, T](
+        self, func: Callable[P, Awaitable[T]]
+    ) -> Callable[P, Awaitable[T]]:
+        async def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
             if self.num_calls >= self.calls:
                 await asyncio.sleep(self.__period_remaining())
 

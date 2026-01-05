@@ -1,29 +1,26 @@
 # SPDX-License-Identifier: EUPL-1.2
-# SPDX-FileCopyrightText: 2024-2025 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2024-2026 Anna <cyber@sysrq.in>
 
 """
 Common code for Repology API clients.
 """
 
-from pathlib import PurePosixPath
-from typing import Any
-from urllib.parse import urlparse, urlunparse
-
 import aiohttp
+from pydantic import JsonValue
 from pydantic_core import from_json
+from yarl import URL
 
 from repology_client.exceptions import EmptyResponse
 from repology_client.utils import ensure_session, limit
 
 
 @limit(calls=1, period=1.25)
-async def _call(location: str, params: dict | None = None, *,
+async def _call(url: URL, *,
                 session: aiohttp.ClientSession | None = None) -> bytes:
     """
     Do a single rate-limited request.
 
-    :param location: URL location
-    :param params: URL query string parameters
+    :param url: URL location
     :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
@@ -33,8 +30,7 @@ async def _call(location: str, params: dict | None = None, *,
     """
 
     async with ensure_session(session) as aiohttp_session:
-        async with aiohttp_session.get(location, params=params or {},
-                                       raise_for_status=True) as response:
+        async with aiohttp_session.get(url, raise_for_status=True) as response:
             data = await response.read()
             if not data:
                 raise EmptyResponse
@@ -42,15 +38,12 @@ async def _call(location: str, params: dict | None = None, *,
     return data
 
 
-async def _json_api(base_url: str, endpoint: str | None = None,
-                    params: dict | None = None, *,
-                    session: aiohttp.ClientSession | None = None) -> Any:
+async def api(url: URL, *,
+              session: aiohttp.ClientSession | None = None) -> JsonValue:
     """
     Do a single API request.
 
-    :param base: base API URL
-    :param endpoint: API endpoint
-    :param params: URL query string parameters
+    :param url: full URL (including a query string)
     :param session: :external+aiohttp:py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
@@ -60,18 +53,7 @@ async def _json_api(base_url: str, endpoint: str | None = None,
     :returns: decoded JSON response
     """
 
-    url = urlparse(base_url)
-
-    url_path = url.path
-    if endpoint is not None:
-        endpoint_path = PurePosixPath(endpoint).relative_to("/")
-        url_path = str(PurePosixPath(url.path) / endpoint_path)
-        if endpoint.endswith("/"):
-            # add trailing slash back
-            url_path += "/"
-
-    raw_data = await _call(urlunparse(url._replace(path=url_path)),
-                           params, session=session)
+    raw_data = await _call(url, session=session)
     data = from_json(raw_data)
     if not data:
         raise EmptyResponse

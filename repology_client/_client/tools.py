@@ -1,14 +1,16 @@
 # SPDX-License-Identifier: EUPL-1.2
-# SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
+# SPDX-FileCopyrightText: 2024-2026 Anna <cyber@sysrq.in>
 
-""" Asynchronous wrapper for Repology API tools. """
+"""
+Asynchronous wrapper for Repology API tools.
+"""
 
 from collections.abc import Set
 
 import aiohttp
-from pydantic import TypeAdapter
+from yarl import URL
 
-from repology_client._client import _json_api
+from repology_client._client import api
 from repology_client.constants import TOOL_PROJECT_BY_URL
 from repology_client.exceptions.resolve import (
     MultipleProjectsFound,
@@ -19,9 +21,7 @@ from repology_client.types import (
     ResolvePackageType,
     _ResolvePkg,
 )
-from repology_client.utils import ensure_session
-
-project_by_adapter: TypeAdapter = TypeAdapter(Set[Package])
+from repology_client.utils import get_type_adapter, ensure_session
 
 
 async def resolve_package(repo: str, name: str,
@@ -67,9 +67,9 @@ async def resolve_package(repo: str, name: str,
 
     pkg = _ResolvePkg.model_validate(params)
     try:
+        url = URL(TOOL_PROJECT_BY_URL).with_query(params)
         async with ensure_session(session) as aiohttp_session:
-            data = await _json_api(TOOL_PROJECT_BY_URL, params=params,
-                                   session=aiohttp_session)
+            data = await api(url, session=aiohttp_session)
     except aiohttp.ClientResponseError as err:
         if err.status == 404:
             raise ProjectNotFound(pkg) from err
@@ -77,8 +77,8 @@ async def resolve_package(repo: str, name: str,
 
     if (
         isinstance(data, dict)
-        and (targets := data.get("targets")) is not None
+        and isinstance(targets := data.get("targets"), dict)
     ):
         raise MultipleProjectsFound(pkg, targets.keys())
 
-    return project_by_adapter.validate_python(data)
+    return get_type_adapter(Set[Package]).validate_python(data)
