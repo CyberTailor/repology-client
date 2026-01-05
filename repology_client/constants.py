@@ -9,7 +9,7 @@ Hardcoded constants for Repology API.
 PACKAGE = "repology-client"
 
 #: Library version.
-VERSION = "0.5.0"
+VERSION = "0.6.0"
 
 #: Library homepage.
 HOMEPAGE = "https://repology-client.sysrq.in"

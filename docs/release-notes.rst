@@ -4,7 +4,7 @@
 Release Notes
 =============
 
-0.5.0-next
+0.6.0
 ----------
 
 - **Breaking**: :py:func:`repology_client.api` now takes :py:class:`yarl.URL`,
