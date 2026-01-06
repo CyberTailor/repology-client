@@ -44,7 +44,7 @@ async def resolve_package(repo: str, name: str,
     :param name: package name in the repository
     :param name_type: which name is used, "source" or "binary"
     :param autoresolve: enable automatic ambiguity resolution
-    :param session: :external+aiohttp:py:mod:`aiohttp` client session
+    :param session: :py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.resolve.MultipleProjectsFound: on
         ambiguous package names when automatic resolution is disabled

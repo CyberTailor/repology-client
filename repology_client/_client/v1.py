@@ -37,7 +37,7 @@ async def get_packages(project: str, *,
     single project.
 
     :param project: project name on Repology
-    :param session: :external+aiohttp:py:mod:`aiohttp` client session
+    :param session: :py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises repology_client.exceptions.InvalidInput: if ``project`` is an empty

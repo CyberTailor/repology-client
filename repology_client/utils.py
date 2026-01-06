@@ -81,7 +81,7 @@ async def ensure_session(
     """
     Create a new client session, if necessary, and close it on exit.
 
-    :param session: :external+aiohttp:py:mod:`aiohttp` client session
+    :param session: :py:mod:`aiohttp` client session
     """
 
     keep_session = True

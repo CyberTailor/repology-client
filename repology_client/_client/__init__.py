@@ -21,7 +21,7 @@ async def _call(url: URL, *,
     Do a single rate-limited request.
 
     :param url: URL location
-    :param session: :external+aiohttp:py:mod:`aiohttp` client session
+    :param session: :py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises aiohttp.ClientResponseError: on HTTP errors
@@ -44,7 +44,7 @@ async def api(url: URL, *,
     Do a single API request.
 
     :param url: full URL (including a query string)
-    :param session: :external+aiohttp:py:mod:`aiohttp` client session
+    :param session: :py:mod:`aiohttp` client session
 
     :raises repology_client.exceptions.EmptyResponse: on empty response
     :raises aiohttp.ClientResponseError: on HTTP errors

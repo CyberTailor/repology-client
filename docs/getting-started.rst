@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2024 Anna <cyber@sysrq.in>
+.. SPDX-FileCopyrightText: 2024-2026 Anna <cyber@sysrq.in>
 .. SPDX-License-Identifier: CC0-1.0
 
 Getting Started
@@ -33,8 +33,7 @@ Advanced usage
 --------------
 
 You can control timeouts and other connection settings by constructing custom
-:external:py:class:`aiohttp.ClientSession` objects and passing them to a
-function.
+:py:class:`aiohttp.ClientSession` objects and passing them to a function.
 
 If you're making an application that makes bulk requests to Repology API, please
 consider setting custom ``User-agent`` header. It usually looks like this::

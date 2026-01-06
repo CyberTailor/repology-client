@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2023 Anna <cyber@sysrq.in>
+.. SPDX-FileCopyrightText: 2023-2026 Anna <cyber@sysrq.in>
 .. SPDX-License-Identifier: CC0-1.0
 
 Installation
@@ -15,7 +15,9 @@ Prerequisites
 The following dependencies are used by this library:
 
 * :external+aiohttp:doc:`aiohttp <index>`
-* `pydantic`_ (with direct use of pydantic-core)
+* `pydantic`_ (with direct use of :pypi:`pydantic_core`)
+* :external+yarl:doc:`yarl <index>` (you already have it if :pypi:`aiohttp` is
+  installed)
 
 .. _pydantic: https://pydantic.dev/
 
