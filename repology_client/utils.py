@@ -11,6 +11,7 @@ import functools
 import time
 from collections.abc import AsyncGenerator, Awaitable, Callable
 from contextlib import asynccontextmanager
+from typing import cast
 
 import aiohttp
 from pydantic import TypeAdapter, validate_call
@@ -126,7 +127,7 @@ def format_link_status(code: int) -> str:
         result = LinkStatus(code)
     else:
         try:
-            result = _LinkStatusCodes(code).value
+            result = cast(LinkStatus, _LinkStatusCodes(code).value)
         except ValueError:
             result = LinkStatus(code, f"unknown status code {code}, please "
                                       "report a bug to repology-client")
