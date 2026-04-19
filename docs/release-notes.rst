@@ -4,7 +4,7 @@
 Release Notes
 =============
 
-0.6.0-next
+0.7.0
 ----------
 
 - **New**: :py:class:`repology_client.types.CPE` type that can be used for
