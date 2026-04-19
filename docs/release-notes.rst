@@ -4,7 +4,7 @@
 Release Notes
 =============
 
-0.7.0-next
+0.7.1
 ----------
 
 - Work around buggy paging to not get stuck in an infinite loop while fetching
