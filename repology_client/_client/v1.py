@@ -155,8 +155,10 @@ async def get_problems(repo: str, maintainer: str = "",
         endpoint = URL(API_V1_URL) / "maintainer" / maintainer / "problems-for-repo" / repo
 
     query = {}
+    visited: set[str] = set()
     if start:
         query["start"] = start
+        visited.add(start)
 
     result: list[Problem] = []
     async with ensure_session(session) as aiohttp_session:
@@ -182,6 +184,14 @@ async def get_problems(repo: str, maintainer: str = "",
                 # we probably hit API limits, so…
                 # …choose lexicographically highest project as a new start
                 query["start"] = max(item.project_name for item in batch)
+                # But what if there are more than 200 problems for a single
+                # project? We need to do something, otherwise we'll be stuck in
+                # an infinite loop!
+                if query["start"] in visited:
+                    query["start"] = (
+                        query["start"][:-1] + chr(ord(query["start"][-1]) + 1)
+                    )
+                visited.add(query["start"])
             else:
                 break
 

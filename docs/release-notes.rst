@@ -4,8 +4,14 @@
 Release Notes
 =============
 
-0.7.0
+0.7.0-next
 ----------
+
+- Work around buggy paging to not get stuck in an infinite loop while fetching
+  problems.
+
+0.7.0
+-----
 
 - **New**: :py:class:`repology_client.types.CPE` type that can be used for
   converting CPE structs to string identifiers.
@@ -14,7 +20,7 @@ Release Notes
 -----
 
 - **Breaking**: :py:func:`repology_client.api` now takes :py:class:`yarl.URL`,
-  as our cursed custom URL processing was replaced by proper :pypi:`yarl` API.
+  as our cursed custom URL processing was replaced by a proper :pypi:`yarl` API.
 
 - **Gone**: Python 3.11 support.
 
@@ -33,7 +39,7 @@ Release Notes
 
 - Increase the delay between API calls.
 
-- Fix duplicate results in problems list.
+- Fix duplicate results in the problems list.
 
 0.4.0
 -----
@@ -63,10 +69,10 @@ Release Notes
 - **New**: :py:func:`repology_client.exp.distromap` function for
   ``/api/experimental/distromap`` endpoint.
 
-- Parse JSON with possibly faster Pydantic parser, since we already use this
+- Parse JSON with a possibly faster Pydantic parser, since we already use this
   library.
 
-- Improve API documentation and switch to Alabaster HTML theme.
+- Improve API documentation and switch to the Alabaster HTML theme.
 
 0.1.0
 -----
@@ -76,7 +82,7 @@ Release Notes
 
 - **Gone:** Python 3.10 support.
 
-- Fix default session not closing properly.
+- Fix the default session not closing properly.
 
 __ https://repology.org/tools/project-by
 
