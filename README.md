@@ -45,8 +45,8 @@ Contributing
 Patches and pull requests are welcome. Please use either [git-send-email(1)][1]
 or [git-request-pull(1)][2], addressed to <cyber@sysrq.in>.
 
-If you prefer GitHub-style workflow, use the [mirror repo][gh] to send pull
-requests.
+If you don't like the email-based workflow, use the [mirror repo][codeberg] to
+send pull requests.
 
 Your commit message should conform to the following standard:
 
@@ -62,7 +62,7 @@ sure the correct authorship appears.
 
 [1]: https://git-send-email.io/
 [2]: https://git-scm.com/docs/git-request-pull
-[gh]: http://github.com/cybertailor/repology-client
+[codeberg]: https://codeberg.org/cybertailor/repology-client
 
 
 IRC
