@@ -56,10 +56,11 @@ async def test_get_projects_simple(session: aiohttp.ClientSession):
     assert len(projects) == 200
 
 
+@pytest.mark.parametrize("n", [300, 400, 500])
 @pytest.mark.vcr
 @pytest.mark.asyncio
-async def test_get_400_projects(session: aiohttp.ClientSession):
-    projects = await repology_client.get_projects(count=400, session=session)
+async def test_get_n_projects(session: aiohttp.ClientSession, n: int):
+    projects = await repology_client.get_projects(count=n, session=session)
     assert len(projects) > 200
 
 
@@ -108,10 +109,12 @@ async def test_get_problems_simple(session: aiohttp.ClientSession):
     assert len(problems) == 200
 
 
+@pytest.mark.parametrize("n", [300, 400, 500])
 @pytest.mark.vcr
 @pytest.mark.asyncio
-async def test_get_400_problems(session: aiohttp.ClientSession):
-    problems = await repology_client.get_problems("freebsd", count=400, session=session)
+async def test_get_n_problems(session: aiohttp.ClientSession, n: int):
+    problems = await repology_client.get_problems("freebsd", count=n,
+                                                  session=session)
     assert len(problems) > 200
 
     # Make sure there are no duplicates
@@ -128,10 +131,11 @@ async def test_get_maintainer_problems(session: aiohttp.ClientSession):
     assert len(problems) == 200
 
 
+@pytest.mark.parametrize("n", [300, 400, 500])
 @pytest.mark.vcr
 @pytest.mark.asyncio
-async def test_get_400_maintainer_problems(session: aiohttp.ClientSession):
-    problems = await repology_client.get_problems("freebsd", count=400,
+async def test_get_n_maintainer_problems(session: aiohttp.ClientSession, n: int):
+    problems = await repology_client.get_problems("freebsd", count=n,
                                                   maintainer="ports@freebsd.org",
                                                   session=session)
     assert len(problems) > 200
