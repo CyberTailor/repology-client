@@ -4,8 +4,14 @@
 Release Notes
 =============
 
-0.6.0
+0.6.0-next
 ----------
+
+- **New**: :py:class:`repology_client.types.CPE` type that can be used for
+  converting CPE structs to string identifiers.
+
+0.6.0
+-----
 
 - **Breaking**: :py:func:`repology_client.api` now takes :py:class:`yarl.URL`,
   as our cursed custom URL processing was replaced by proper :pypi:`yarl` API.

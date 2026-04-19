@@ -7,7 +7,7 @@ Type definitions for Repology API.
 
 from enum import ReprEnum, StrEnum
 
-from pydantic import BaseModel, ConfigDict, JsonValue
+from pydantic import BaseModel, ConfigDict, Field, JsonValue
 
 
 class ResolvePackageType(StrEnum):
@@ -158,6 +158,30 @@ class Problem(BaseModel):
     srcname: str | None = None
     #: Repository (binary) package name.
     binname: str | None = None
+
+
+class CPE(BaseModel):
+    """
+    Type for CPE (Common Platform Enumeration) identifiers returned by Repology.
+    """
+    model_config = ConfigDict(defer_build=True, frozen=True)
+
+    vendor: str = Field(alias="cpe_vendor", default="*")
+    product: str = Field(alias="cpe_product", default="*")
+    edition: str = Field(alias="cpe_edition", default="*")
+    lang: str = Field(alias="cpe_lang", default="*")
+    sw_edition: str = Field(alias="cpe_sw_edition", default="*")
+    target_sw: str = Field(alias="cpe_target_sw", default="*")
+    target_hw: str = Field(alias="cpe_target_hw", default="*")
+    other: str = Field(alias="cpe_other", default="*")
+
+    def __str__(self) -> str:
+        fields = [
+            "cpe", "2.3", "a", self.vendor, self.product, "*", "*",
+            self.edition, self.lang, self.sw_edition, self.target_sw,
+            self.target_hw, self.other
+        ]
+        return ":".join(fields)
 
 
 class LinkStatus(int):
