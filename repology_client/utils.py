@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: EUPL-1.2 AND CC-BY-SA-3.0
 # SPDX-FileCopyrightText: 2024-2026 Anna <cyber@sysrq.in>
-# SPDX-FileCopyrightText: 2017 Mark Amery <markrobertamery@gmail.com>
 
 """
 Utility functions and classes.
@@ -37,7 +36,7 @@ class limit():
 
     Based on `this StackOverflow answer`__.
 
-    __ https://stackoverflow.com/a/62503115/4257264
+    __ https://stackoverflow.com/a/73650870/4257264
     """
 
     def __init__(self, calls: int, period: float):
@@ -47,32 +46,27 @@ class limit():
         """
         self.calls: int = calls
         self.period: float = period
-        self.clock: Callable[[], float] = time.monotonic
-        self.last_reset: float = 0.0
-        self.num_calls: int = 0
+        self.semaphore = asyncio.Semaphore(calls)
+        self.requests_finish_time: list[float] = []
+
+    async def sleep(self) -> None:
+        if len(self.requests_finish_time) >= self.calls:
+            sleep_before = self.requests_finish_time.pop(0)
+            if sleep_before >= time.monotonic():
+                await asyncio.sleep(sleep_before - time.monotonic())
 
     def __call__[**P, T](
         self, func: Callable[P, Awaitable[T]]
     ) -> Callable[P, Awaitable[T]]:
         async def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
-            if self.num_calls >= self.calls:
-                await asyncio.sleep(self.__period_remaining())
+            async with self.semaphore:
+                await self.sleep()
+                result = await func(*args, **kwargs)
+                self.requests_finish_time.append(time.monotonic() + self.period)
 
-            period_remaining = self.__period_remaining()
-
-            if period_remaining <= 0:
-                self.num_calls = 0
-                self.last_reset = self.clock()
-
-            self.num_calls += 1
-
-            return await func(*args, **kwargs)
+            return result
 
         return wrapper
-
-    def __period_remaining(self) -> float:
-        elapsed = self.clock() - self.last_reset
-        return self.period - elapsed
 
 
 @asynccontextmanager

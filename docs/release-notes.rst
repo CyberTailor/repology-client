@@ -4,8 +4,13 @@
 Release Notes
 =============
 
-0.7.1
+0.7.1-next
 ----------
+
+- Make rate-limiting work correctly with :py:func:`asyncio.gather`.
+
+0.7.1
+-----
 
 - Work around buggy paging to not get stuck in an infinite loop while fetching
   problems.
