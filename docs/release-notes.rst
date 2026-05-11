@@ -4,7 +4,7 @@
 Release Notes
 =============
 
-0.7.1-next
+0.7.2
 ----------
 
 - Make rate-limiting work correctly with :py:func:`asyncio.gather`.
